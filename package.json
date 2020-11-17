@@ -1,0 +1,19 @@
+{
+  "name": "vef1-2020-h2",
+  "version": "1.0.0",
+  "description": "Verkefnið felst í því að smíða vef lítinn myndbandavef sem nýtir gögn úr JSON skrá.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KristjanLeo/Vefforritun-Hopaverkefni2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KristjanLeo/Vefforritun-Hopaverkefni2/issues"
+  },
+  "homepage": "https://github.com/KristjanLeo/Vefforritun-Hopaverkefni2#readme"
+}
