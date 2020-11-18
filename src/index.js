@@ -1,6 +1,5 @@
-import { element } from './lib/utils';
+import { element, videoLength, videoAge } from './lib/utils';
 import fetchVideos from './lib/fetchvideos';
-
 async function displayVideos(videos){
   const BODY = document.querySelector('body');
 
@@ -43,7 +42,8 @@ async function displayVideos(videos){
       const videoId = Categories[i].videos[j];
       Thumbnails[i][j] = element('img', {'src' : videos.videos[videoId - 1].poster, 'class' : 'thumbnails'}, {}, '');
       Title[i][j] = element('h4', {}, {}, videos.videos[videoId - 1].title);
-      Info[i][j] = element('div', {'class' : 'info'}, {}, Title[i][j]);
+      Time[i][j] = element('h5', {}, {}, videoAge(videos.videos[videoId - 1].created));
+      Info[i][j] = element('div', {'class' : 'info'}, {}, Title[i][j], Time[i][j]);
       Videos[i][j] = element('div', {'class' : 'col col-4 col-sm-10 offset-col-sm-1 videocontainer'}, {}, Thumbnails[i][j], Info[i][j]);
       VideoRows[i].appendChild(Videos[i][j]);
     }
