@@ -25,6 +25,9 @@ async function displayVideos(videos){
   const VideoRows = new Array(Categories.length);
   const Videos = new Array(Categories.length);
   const Thumbnails = new Array(Categories.length);
+  const Info = new Array(Categories.length);
+  const Title = new Array(Categories.length);
+  const Time = new Array(Categories.length);
 
   for(let i = 0; i < Categories.length; i++){
     Header[i] = element('h2', {'class' : 'col col-12'}, {}, Categories[i].title);
@@ -32,10 +35,16 @@ async function displayVideos(videos){
     VideoRows[i] = element('div', {'class' : 'row'}, {}, '');
     Videos[i] = new Array(Categories[i].videos.length);
     Thumbnails[i] = new Array(Categories[i].videos.length);
+    Info[i] = new Array(Categories[i].videos.length);
+    Title[i] = new Array(Categories[i].videos.length);
+    Time[i] = new Array(Categories[i].videos.length);
+
     for(let j = 0; j < Videos[i].length; j++){
       const videoId = Categories[i].videos[j];
       Thumbnails[i][j] = element('img', {'src' : videos.videos[videoId - 1].poster, 'class' : 'thumbnails'}, {}, '');
-      Videos[i][j] = element('div', {'class' : 'col col-4 col-sm-10 offset-col-sm-1'}, {}, Thumbnails[i][j]);
+      Title[i][j] = element('h4', {}, {}, videos.videos[videoId - 1].title);
+      Info[i][j] = element('div', {'class' : 'info'}, {}, Title[i][j]);
+      Videos[i][j] = element('div', {'class' : 'col col-4 col-sm-10 offset-col-sm-1 videocontainer'}, {}, Thumbnails[i][j], Info[i][j]);
       VideoRows[i].appendChild(Videos[i][j]);
     }
     Flokkur[i] = element('div', {'class' : 'grid'}, {}, Headers[i], VideoRows[i]);
