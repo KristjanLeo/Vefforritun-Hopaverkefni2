@@ -13,51 +13,51 @@ async function displayVideos(videos){
 
   // Sækjum alla flokkana :
   const Categories = new Array(videos.categories.length);
-  for(let i = 0; i < videos.categories.length; i++){
-    Categories[i] = videos.categories[i];
+  for(let i = 0; i < videos.categories.length; i++){  
+    	Categories[i] = videos.categories[i];
   }
 
-  // Búum núna til grid (div) fyrirsérhvern flokk, header row og 1 eða 2 aukalega til þess að halda utan um videoin
-  const Flokkur = new Array(Categories.length);
-  const Headers = new Array(Categories.length);
-  const Header = new Array(Categories.length);
-  const VideoRows = new Array(Categories.length);
-  const Videos = new Array(Categories.length);
-  const Thumbnails = new Array(Categories.length);
-  const Info = new Array(Categories.length);
-  const Title = new Array(Categories.length);
-  const Time = new Array(Categories.length);
+// Búum núna til grid (div) fyrirsérhvern flokk, header row og 1 eða 2 aukalega til þess að halda utan um videoin
+const Flokkur = new Array(Categories.length);
+const Headers = new Array(Categories.length);
+const Header = new Array(Categories.length);
+const VideoRows = new Array(Categories.length);
+const Videos = new Array(Categories.length);
+const Thumbnails = new Array(Categories.length);
+const Info = new Array(Categories.length);
+const Title = new Array(Categories.length);
+const Time = new Array(Categories.length);
 
-  for(let i = 0; i < Categories.length; i++){
-    Header[i] = element('h2', {'class' : 'col col-12'}, {}, Categories[i].title);
-    Headers[i] = element('div', {'class' : 'row'}, {}, Header[i]);
-    VideoRows[i] = element('div', {'class' : 'row'}, {}, '');
-    Videos[i] = new Array(Categories[i].videos.length);
-    Thumbnails[i] = new Array(Categories[i].videos.length);
-    Info[i] = new Array(Categories[i].videos.length);
-    Title[i] = new Array(Categories[i].videos.length);
-    Time[i] = new Array(Categories[i].videos.length);
+for(let i = 0; i < Categories.length; i++){
+  Header[i] = element('h2', {'class' : 'col col-12'}, {}, Categories[i].title);
+  Headers[i] = element('div', {'class' : 'row'}, {}, Header[i]);
+  VideoRows[i] = element('div', {'class' : 'row'}, {}, '');
+  Videos[i] = new Array(Categories[i].videos.length);
+  Thumbnails[i] = new Array(Categories[i].videos.length);
+  Info[i] = new Array(Categories[i].videos.length);
+  Title[i] = new Array(Categories[i].videos.length);
+  Time[i] = new Array(Categories[i].videos.length);
 
-    for(let j = 0; j < Videos[i].length; j++){
-      const videoId = Categories[i].videos[j];
-      Thumbnails[i][j] = element('img', {'src' : videos.videos[videoId - 1].poster, 'class' : 'thumbnails'}, {}, '');
-      Thumbnails[i][j].onclick = function() {
-        document.location.href = `video.html?id=${videoId}`;
-      };
-      Title[i][j] = element('h4', {}, {}, videos.videos[videoId - 1].title);
-      Time[i][j] = element('h5', {}, {}, videoAge(videos.videos[videoId - 1].created));
-      Info[i][j] = element('div', {'class' : 'info'}, {}, Title[i][j], Time[i][j]);
-      Videos[i][j] = element('div', {'class' : 'col col-4 col-sm-10 offset-col-sm-1 videocontainer'}, {}, Thumbnails[i][j], Info[i][j]);
-      VideoRows[i].appendChild(Videos[i][j]);
-    }
-    Flokkur[i] = element('div', {'class' : 'grid'}, {}, Headers[i], VideoRows[i]);
-    main.appendChild(Flokkur[i]);
+  for(let j = 0; j < Videos[i].length; j++){
+    const videoId = Categories[i].videos[j];
+    Thumbnails[i][j] = element('img', {'src' : videos.videos[videoId - 1].poster, 'class' : 'thumbnails'}, {}, '');
+    Title[i][j] = element('h4', {}, {}, videos.videos[videoId - 1].title);
+    Time[i][j] = element('h5', {}, {}, videoAge(videos.videos[videoId - 1].created));
+    Info[i][j] = element('div', {'class' : 'info'}, {}, Title[i][j], Time[i][j]);
+    Videos[i][j] = element('div', {'class' : 'col col-4 col-sm-10 offset-col-sm-1 videocontainer'}, {}, Thumbnails[i][j], Info[i][j]);
+    Videos[i][j].onclick = function() {
+      document.location.href = `video.html?id=${videoId}`;
+    };
+    VideoRows[i].appendChild(Videos[i][j]);
   }
+  Flokkur[i] = element('div', {'class' : 'grid'}, {}, Headers[i], VideoRows[i]);
+  main.appendChild(Flokkur[i]);
+}
 
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  await fetchVideos().then((data) => {
-    displayVideos(data);
+await fetchVideos().then((data) => {
+  displayVideos(data);
   });
 });
