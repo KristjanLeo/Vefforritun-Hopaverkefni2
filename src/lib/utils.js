@@ -44,22 +44,21 @@ export function element(name, attributes = null, events = null, ...children) {
   return el;
 }
 
-/**
- * Format a timestamp as dd.mm.yyyy hh:mm:ss e.g. "01.11.2020 12:00:00".
- *
- * @param {number} timestamp Unix timestamp to format
- * @returns {string} Formatted string.
- */
 
+/**
+ * Tekur inn tíma í sekúndum og skilar fallegum tíma ... TODO
+ * @param  {int} time Tími í sekúndum
+ * @return {string}   Fallegur tími
+ */
 export function videoLength(time){
-  let hours= Math.floor(time/3600);
-  let minutes= Math.floor((time%3600)/60);
+  let hours = Math.floor(time/3600) > 0 ? Math.floor(time/3600) : '';
+  let minutes= Math.floor((time%3600)/60) > 0 ? Math.floor((time%3600)/60) : '';
   let seconds= time%60;
   return (hours +':'+ minutes + ':' + seconds);
 }
 
 export function videoAge(seconds){
-  age=(Date.now()-seconds)/1000
+  let age = (Date.now()-seconds)/1000
   if(age>365*24*60*60){
       return('Fyrir '+Math.floor(age/(365*24*60*60))+' árum síðan');
   }
