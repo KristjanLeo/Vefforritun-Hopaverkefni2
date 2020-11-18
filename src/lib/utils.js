@@ -50,13 +50,35 @@ export function element(name, attributes = null, events = null, ...children) {
  * @param {number} timestamp Unix timestamp to format
  * @returns {string} Formatted string.
  */
-export function formatDate(timestamp) {
-  const date = new Date(timestamp);
-  const Day = date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`;
-  const Month = date.getMonth() + 1 > 9 ? (date.getMonth() + 1) : `0${date.getMonth() + 1}`;
-  const Year = date.getYear() > 9 ? (1900 + date.getYear()) : `0${1900 + date.getYear()}`;
-  const Hour = date.getHours() > 9 ? date.getHours() : `0${date.getHours()}`;
-  const Minute = date.getMinutes() > 9 ? date.getMinutes() : `0${date.getMinutes()}`;
-  const Second = date.getSeconds() > 9 ? date.getSeconds() : `0${date.getSeconds()}`;
-  return `${Day}.${Month}.${Year} ${Hour}:${Minute}:${Second}`;
+
+export function videoLength(time){
+  let hours= Math.floor(time/3600);
+  let minutes= Math.floor((time%3600)/60);
+  let seconds= time%60;
+  return (hours +':'+ minutes + ':' + seconds);
+}
+
+export function videoAge(seconds){
+  age=(Date.now()-seconds)/1000
+  if(age>365*24*60*60){
+      return('Fyrir '+Math.floor(age/(365*24*60*60))+' árum síðan');
+  }
+  else if(age>=30*24*60*60){
+      return('Fyrir '+Math.floor(age/(30*24*60*60))+' mánuðum síðan');
+  }
+  else if(age>=7*24*60*60){
+      return('Fyrir '+Math.floor(age/(7*24*60*60))+' vikum síðan');
+  }
+  else if(age>=24*60*60){
+      return('Fyrir '+Math.floor(age/(24*60*60))+' dögum síðan');
+  }
+  else if(age>=60*60){
+      return('Fyrir '+Math.floor(age/(60*60))+' klukkutímum síðan');
+  }
+  else if(age>=60){
+      return('Fyrir '+Math.floor(age/60)+' mínútum síðan');
+  }
+  else{
+      return('Fyrir ')+age+' sekúndum síðan'
+  }
 }
