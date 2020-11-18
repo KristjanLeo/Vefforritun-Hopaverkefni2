@@ -3,6 +3,11 @@ import fetchVideos from './lib/fetchvideos';
 
 async function displayVideos(videos){
   const BODY = document.querySelector('body');
+
+  // Bætum við title :
+  const MainElement = element('h1', {'class' : 'title'}, {}, 'Fræðslumyndbandaleigan');
+  BODY.appendChild(MainElement);
+
   // Búum til main el :
   const main = element('main', {}, {}, '');
   BODY.appendChild(main);
