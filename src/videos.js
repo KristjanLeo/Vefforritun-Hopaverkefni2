@@ -98,6 +98,11 @@ async function displayRecommandations(videos, video){
   }
 
   const BODY = document.querySelector('body');
+
+  // Split horizontal row :
+  const hr = element('hr', {'class' : 'split'}, {}, '');
+  BODY.appendChild(hr);
+
   // Til baka linkurinn :
   const Tilbaka = element('a', {'href' : 'index.html'}, {}, 'Til baka');
   BODY.appendChild(Tilbaka);
