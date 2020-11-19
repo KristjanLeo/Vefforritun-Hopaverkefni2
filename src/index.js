@@ -27,6 +27,7 @@ async function displayVideos(videos){
   const Info = new Array(Categories.length);
   const Title = new Array(Categories.length);
   const Time = new Array(Categories.length);
+  const HorizontalRow = new Array(Categories.length);
 
   for(let i = 0; i < Categories.length; i++){
     Header[i] = element('h2', {'class' : 'col col-12'}, {}, Categories[i].title);
@@ -52,7 +53,12 @@ async function displayVideos(videos){
     }
     Flokkur[i] = element('div', {'class' : 'grid'}, {}, Headers[i], VideoRows[i]);
     main.appendChild(Flokkur[i]);
+    HorizontalRow[i] = element('hr', {'class' : 'split'}, {}, '');
+    main.appendChild(HorizontalRow[i]);
   }
+
+  const C = element('p', {}, {}, '© Fræðslumyndbandaleigan');
+  BODY.appendChild(C);
 
 }
 
