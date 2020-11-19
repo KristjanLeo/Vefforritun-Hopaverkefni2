@@ -96,6 +96,11 @@ async function displayRecommandations(videos, video){
     relatedVideosCol[i].appendChild(Title[i]);
     relatedVideosCol[i].appendChild(Time[i]);
   }
+
+  const BODY = document.querySelector('body');
+  // Til baka linkurinn :
+  const Tilbaka = element('a', {'href' : 'index.html'}, {}, 'Til baka');
+  BODY.appendChild(Tilbaka);
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
