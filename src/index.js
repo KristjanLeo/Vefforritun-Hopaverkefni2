@@ -42,7 +42,7 @@ async function displayVideos(videos){
       const videoId = Categories[i].videos[j];
       Thumbnails[i][j] = element('img', {'src' : videos.videos[videoId - 1].poster, 'class' : 'thumbnails'}, {}, '');
       Thumbnails[i][j].onclick = function() {
-        document.location.href = 'video.html';
+        document.location.href = `video.html?id=${videoId}`;
       };
       Title[i][j] = element('h4', {}, {}, videos.videos[videoId - 1].title);
       Time[i][j] = element('h5', {}, {}, videoAge(videos.videos[videoId - 1].created));
