@@ -78,12 +78,23 @@ async function displayRecommandations(videos, video){
     relatedVideosRow.appendChild(relatedVideosCol[i]);
   }
 
-  // Thumbnail fyrir hvert video
+  // Thumbnail fyrir hvert video :
   const Thumbnails = new Array(video.related.length);
   for(let i = 0; i < video.related.length; i++){
     let vidId = video.related[i];
     Thumbnails[i] = element('img', {'src' : videos.videos[vidId - 1].poster, 'class' : 'thumbnails'}, {}, '');
     relatedVideosCol[i].appendChild(Thumbnails[i]);
+  }
+
+  // Info fyrir hvert video :
+  const Time = new Array(video.related.length);
+  const Title = new Array(video.related.length);
+  for(let i = 0; i < video.related.length; i++){
+    let vidId = video.related[i];
+    Time[i] = element('h5', {}, {}, videoAge(videos.videos[vidId - 1].created));
+    Title[i] = element('h4', {}, {}, videos.videos[vidId - 1].title);
+    relatedVideosCol[i].appendChild(Title[i]);
+    relatedVideosCol[i].appendChild(Time[i]);
   }
 }
 
