@@ -43,6 +43,48 @@ async function displayvideo(videos, theid){
 
   main.appendChild(videocontainer);
 
+  displayRecommandations(videos, video);
+}
+
+async function displayRecommandations(videos, video){
+
+  const themain = document.querySelector('main');
+  console.log(video.related);
+
+  // Búum til Grid :
+  const tengt = element('div', {'class' : 'grid'}, {}, '');
+  themain.appendChild(tengt);
+
+  // Header rowið :
+  const tengtHeaderRow = element('div', {'class' : 'row'}, {}, '');
+  tengt.appendChild(tengtHeaderRow);
+
+  // Header colið :
+  const tengtHeaderCol = element('h2', {'class' : 'col col-12'}, {}, 'Tengd myndbönd');
+  tengtHeaderRow.appendChild(tengtHeaderCol);
+
+  // Röð fyrir videoin :
+  const relatedVideosRow = element('div', {'class' : 'row'}, {}, '');
+  tengt.appendChild(relatedVideosRow);
+
+  // Col fyrir hvert video :
+  const relatedVideosCol = new Array(video.related.length);
+  for(let i = 0; i < video.related.length; i++){
+    let vidId = video.related[i];
+    relatedVideosCol[i] = element('div', {'class' : 'col col-4 col-sm-12'}, {}, '');
+    relatedVideosCol[i].onclick = function() {
+        document.location.href = `video.html?id=${vidId}`;
+    };
+    relatedVideosRow.appendChild(relatedVideosCol[i]);
+  }
+
+  // Thumbnail fyrir hvert video
+  const Thumbnails = new Array(video.related.length);
+  for(let i = 0; i < video.related.length; i++){
+    let vidId = video.related[i];
+    Thumbnails[i] = element('img', {'src' : videos.videos[vidId - 1].poster, 'class' : 'thumbnails'}, {}, '');
+    relatedVideosCol[i].appendChild(Thumbnails[i]);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
