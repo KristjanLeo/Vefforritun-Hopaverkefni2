@@ -74,7 +74,7 @@ async function displayvideo(videos, theid){
   button2.addEventListener ("click", function() {
     alert("next");
   });
-
+  
   displayRecommandations(videos, video);
 }
 
@@ -128,6 +128,16 @@ async function displayRecommandations(videos, video){
     relatedVideosCol[i].appendChild(Title[i]);
     relatedVideosCol[i].appendChild(Time[i]);
   }
+
+  const BODY = document.querySelector('body');
+
+  // Split horizontal row :
+  const hr = element('hr', {'class' : 'split'}, {}, '');
+  BODY.appendChild(hr);
+
+  // Til baka linkurinn :
+  const Tilbaka = element('a', {'href' : 'index.html'}, {}, 'Til baka');
+  BODY.appendChild(Tilbaka);
 }
 
 document.addEventListener('DOMContentLoaded', async () => {

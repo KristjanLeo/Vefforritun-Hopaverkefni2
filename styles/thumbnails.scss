@@ -1,0 +1,19 @@
+.thumbnails {
+  width: 100%;
+}
+
+.videocontainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.info{
+  height: 3rem;
+  display: flex;
+  align-content: space-between;
+  flex-direction: column;
+  line-height: 2.2rem;
+
+}
