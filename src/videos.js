@@ -38,11 +38,43 @@ async function displayvideo(videos, theid){
   videorow.appendChild(videocol);
 
   // Videoið sjálft :
-  const thevideo = element('video', {'src' : video.video, 'controls' : ''}, {}, '');
+  const thevideo = element('video', {'src' : video.video}, {}, '');
   videocol.appendChild(thevideo);
 
   main.appendChild(videocontainer);
 
+  //grid fyrir controlbar
+  const controlbar = element('div', {'class' : 'row'}, {},'');
+  const image = element('img', {'class' : 'button-img', 'src' : 'img/back.svg', 'width' : '75', 'height' : '75'}, {}, '');
+  const button = element('button', {'class' : 'button'}, {}, image);
+
+  // 1. Create the button
+  var button1 = document.createElement("button");
+  button1.innerHTML = '<img src = "img/back.svg">';
+
+  // 2. Append somewhere
+  main.appendChild(button);
+
+  // 3. Add event handler
+  button.addEventListener ("click", function() {
+    alert("back");
+  });
+
+  const image = element('img', {'class' : 'button-img', 'src' : 'img/back.svg', 'width' : '75', 'height' : '75'}, {}, '');
+  const button= element('button', {'class' : 'button'}, {}, image);
+
+  // 1. Create the button
+  var button2 = document.createElement("button");
+  button2.innerHTML = '<img src = "img/next.svg">';
+  
+  // 2. Append somewhere
+  main.appendChild(button);
+  
+  // 3. Add event handler
+  button2.addEventListener ("click", function() {
+    alert("next");
+  });
+  
   displayRecommandations(videos, video);
 }
 
