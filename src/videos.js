@@ -1,8 +1,9 @@
-import { element, videoAge } from './lib/utils';
+import { element, videoAge, videoLength } from './lib/utils';
 import fetchVideos from './lib/fetchvideos';
 import {
   back, playpause, muteunmute, fullscreen, next,
 } from './videolib/videocontrols';
+
 
 async function displayControlBar(thevideo) {
   const main = document.querySelector('main');
@@ -85,10 +86,14 @@ async function displayRecommandations(videos, video) {
 
   // Thumbnail fyrir hvert video :
   const Thumbnails = new Array(video.related.length);
+  const Length = new Array(video.related.length);
+  const Div = new Array(video.related.length);
   for (let i = 0; i < video.related.length; i += 1) {
     const vidId = video.related[i];
     Thumbnails[i] = element('img', { src: videos.videos[vidId - 1].poster, class: 'thumbnails' }, {}, '');
-    relatedVideosCol[i].appendChild(Thumbnails[i]);
+    Length[i] = element('span', {'class': 'display-time'}, {}, videoLength(videos.videos[vidId - 1].duration));
+    Div[i] =  element('div', {'class': 'thumbnail-container videocontainer'}, {}, Thumbnails[i],Length[i]);
+    relatedVideosCol[i].appendChild(Div[i]);
   }
 
   // Info fyrir hvert video :
