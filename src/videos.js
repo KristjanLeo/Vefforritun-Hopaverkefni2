@@ -1,5 +1,6 @@
 import { element, videoLength, videoAge } from './lib/utils';
 import fetchVideos from './lib/fetchvideos';
+import { back, playpause, muteunmute, fullscreen, next } from './videolib/videocontrols';
 
 
 async function readVideoID(videodata){
@@ -88,43 +89,9 @@ async function displayControlBar(thevideo){
 
 }
 
-async function back(thevideo){
-  thevideo.currentTime -= 3;
-}
-
-async function playpause(thevideo){
-  let playpauseimg = document.getElementById('playpause');
-  if(!(thevideo.paused || thevideo.ended) && thevideo.currentTime > 0){
-    thevideo.pause();
-    playpauseimg.src = 'img/play.svg';
-  }else{
-    thevideo.play();
-    playpauseimg.src = 'img/pause.svg';
-  }
-}
-
-async function muteunmute(thevideo){
-  let muteunmuteimg = document.getElementById('muteunmute');
-  if(thevideo.volume > 0){
-    thevideo.volume = 0;
-    muteunmuteimg.src = 'img/unmute.svg';
-  }else{
-    thevideo.volume = 1.0;
-    muteunmuteimg.src = 'img/mute.svg';
-  }
-}
-
-async function fullscreen(thevideo){
-  thevideo.requestFullscreen();
-}
-
-async function next(thevideo){
-  thevideo.currentTime += 3;
-}
-
-
 async function displayRecommandations(videos, video){
 
+  const BODY = document.querySelector('body');
   const themain = document.querySelector('main');
   console.log(video.related);
 
@@ -174,8 +141,6 @@ async function displayRecommandations(videos, video){
     relatedVideosCol[i].appendChild(Time[i]);
   }
 
-  const BODY = document.querySelector('body');
-
   // Split horizontal row :
   const hr = element('hr', {'class' : 'split'}, {}, '');
   BODY.appendChild(hr);
@@ -183,6 +148,7 @@ async function displayRecommandations(videos, video){
   // Til baka linkurinn :
   const Tilbaka = element('a', {'href' : 'index.html'}, {}, 'Til baka');
   BODY.appendChild(Tilbaka);
+
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
