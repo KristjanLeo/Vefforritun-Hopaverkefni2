@@ -12,3 +12,10 @@ video {
   background-color: white;
   border:0;
 }
+
+.controlrow{
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
