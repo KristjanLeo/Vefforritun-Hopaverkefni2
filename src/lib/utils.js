@@ -51,10 +51,10 @@ export function element(name, attributes = null, events = null, ...children) {
  * @return {string}   Fallegur tími
  */
 export function videoLength(time){
-  let hours = Math.floor(time/3600) > 0 ? Math.floor(time/3600) : '';
-  let minutes= Math.floor((time%3600)/60) > 0 ? Math.floor((time%3600)/60) : '';
-  let seconds= time%60;
-  return (hours +':'+ minutes + ':' + seconds);
+  let hours = Math.floor(time/3600) > 0 ? Math.floor(time/3600) + ':' : '';
+  let minutes= Math.floor((time%3600)/60) > 0 ? Math.floor((time%3600)/60) > 10 ? Math.floor((time%3600)/60) : '0' + Math.floor((time%3600)/60) + ':' : '00:';
+  let seconds= time%60 > 10 ? time&60 : '0'+ time%60;
+  return (hours + minutes + seconds);
 }
 
 export function videoAge(seconds){
