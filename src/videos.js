@@ -1,5 +1,6 @@
 import { element, videoLength, videoAge } from './lib/utils';
 import fetchVideos from './lib/fetchvideos';
+import { back, playpause, muteunmute, fullscreen, next } from './videolib/videocontrols';
 
 
 async function readVideoID(videodata){
@@ -43,43 +44,54 @@ async function displayvideo(videos, theid){
 
   main.appendChild(videocontainer);
 
-  //grid fyrir controlbar
-  const controlbar = element('div', {'class' : 'row'}, {},'');
-  const image = element('img', {'class' : 'button-img', 'src' : 'img/back.svg', 'width' : '75', 'height' : '75'}, {}, '');
-  const button = element('button', {'class' : 'button'}, {}, image);
+  displayControlBar(thevideo);
 
-  // 1. Create the button
-  var button1 = document.createElement("button");
-  button1.innerHTML = '<img src = "img/back.svg">';
-
-  // 2. Append somewhere
-  main.appendChild(button);
-
-  // 3. Add event handler
-  button.addEventListener ("click", function() {
-    alert("back");
-  });
-
-  const image = element('img', {'class' : 'button-img', 'src' : 'img/back.svg', 'width' : '75', 'height' : '75'}, {}, '');
-  const button= element('button', {'class' : 'button'}, {}, image);
-
-  // 1. Create the button
-  var button2 = document.createElement("button");
-  button2.innerHTML = '<img src = "img/next.svg">';
-  
-  // 2. Append somewhere
-  main.appendChild(button);
-  
-  // 3. Add event handler
-  button2.addEventListener ("click", function() {
-    alert("next");
-  });
-  
   displayRecommandations(videos, video);
+
+}
+
+async function displayControlBar(thevideo){
+
+  const main = document.querySelector('main');
+
+  // Grid fyrir control-bar :
+  const controlbar = element('div', {'class' : 'grid'}, {},'');
+  main.appendChild(controlbar);
+
+  // Row fyrir takkana :
+  const controlrow = element('div', {'class' : 'row controlrow'}, {}, '');
+  controlbar.appendChild(controlrow);
+
+  // Back takki :
+  const backimg = element('img', {'class' : 'button-img', 'src' : 'img/back.svg', 'width' : '75', 'height' : '75'}, {}, '');
+  const btnback = element('button', {'class' : 'button'}, {click: (e) => { back(thevideo); }}, backimg);
+  controlrow.appendChild(btnback);
+
+  // Play takki :
+  const playimg = element('img', {'class' : 'button-img', 'src' : 'img/play.svg', 'width' : '75', 'height' : '75', 'id' : 'playpause'}, {}, '');
+  const btnplay = element('button', {'class' : 'button'}, {click: (e) => { playpause(thevideo); }}, playimg);
+  controlrow.appendChild(btnplay);
+
+  // Mute takki :
+  const muteimg = element('img', {'class' : 'button-img', 'src' : 'img/mute.svg', 'width' : '75', 'height' : '75', 'id' : 'muteunmute'}, {}, '');
+  const btnmute = element('button', {'class' : 'button'}, {click: (e) => { muteunmute(thevideo); }}, muteimg);
+  controlrow.appendChild(btnmute);
+
+  // Full screen takki :
+  const fullscreenimg = element('img', {'class' : 'button-img', 'src' : 'img/fullscreen.svg', 'width' : '75', 'height' : '75'}, {}, '');
+  const btnfullscreen = element('button', {'class' : 'button'}, {click: (e) => { fullscreen(thevideo); }}, fullscreenimg);
+  controlrow.appendChild(btnfullscreen);
+
+  // Next takki :
+  const nextimg = element('img', {'class' : 'button-img', 'src' : 'img/next.svg', 'width' : '75', 'height' : '75'}, {}, '');
+  const btnnext = element('button', {'class' : 'button'}, {click: (e) => { next(thevideo); }}, nextimg);
+  controlrow.appendChild(btnnext);
+
 }
 
 async function displayRecommandations(videos, video){
 
+  const BODY = document.querySelector('body');
   const themain = document.querySelector('main');
   console.log(video.related);
 
@@ -129,8 +141,6 @@ async function displayRecommandations(videos, video){
     relatedVideosCol[i].appendChild(Time[i]);
   }
 
-  const BODY = document.querySelector('body');
-
   // Split horizontal row :
   const hr = element('hr', {'class' : 'split'}, {}, '');
   BODY.appendChild(hr);
@@ -138,6 +148,7 @@ async function displayRecommandations(videos, video){
   // Til baka linkurinn :
   const Tilbaka = element('a', {'href' : 'index.html'}, {}, 'Til baka');
   BODY.appendChild(Tilbaka);
+
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
