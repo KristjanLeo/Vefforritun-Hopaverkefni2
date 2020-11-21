@@ -29,6 +29,7 @@ const Title = new Array(Categories.length);
 const Time = new Array(Categories.length);
 const Length = new Array(Categories.length);
 const Div = new Array(Categories.length);
+const HorizontalRow = new Array(Categories.length);
 for(let i = 0; i < Categories.length; i++){
   Header[i] = element('h2', {'class' : 'col col-12'}, {}, Categories[i].title);
   Headers[i] = element('div', {'class' : 'row'}, {}, Header[i]);
@@ -50,7 +51,7 @@ for(let i = 0; i < Categories.length; i++){
     Info[i][j] = element('div', {'class' : 'info'}, {}, Title[i][j], Time[i][j]);
     Videos[i][j] = element('div', {'class' : 'col col-4 col-sm-10 offset-col-sm-1 videocontainer'}, {},Div[i][j], Info[i][j]);
     Videos[i][j].onclick = function() {
-      document.location.href = `video.html?id=${videoId};
+      document.location.href = `video.html?id=${videoId}`;
     };
     VideoRows[i].appendChild(Videos[i][j]);
   }
