@@ -11,7 +11,7 @@
     "sass-watch": "node-sass --source-map-embed --watch *.scss --recursive styles.css",
     "dev": "concurrently npm:browser-sync npm:rollup-watch npm:sass",
     "lint": "stylelint styles.scss ./**/*.scss",
-    "elint": "eslint src/index.js src/lib/*.js",
+    "elint": "eslint src/index.js src/lib/*.js src/videos.js src/videolib/*.js",
     "test": "concurrently npm:elint npm:lint"
   },
   "repository": {
