@@ -1,140 +1,101 @@
-import { element, videoLength, videoAge } from './lib/utils';
+import { element, videoAge } from './lib/utils';
 import fetchVideos from './lib/fetchvideos';
-import { back, playpause, muteunmute, fullscreen, next } from './videolib/videocontrols';
+import {
+  back, playpause, muteunmute, fullscreen, next,
+} from './videolib/videocontrols';
 
-
-async function readVideoID(videodata){
-  try {
-    const url_string = (window.location.href).toLowerCase();
-    const url = new URL(url_string);
-    const videoId = url.searchParams.get('id');
-    displayvideo(videodata, videoId);
-  } catch (err) {
-    console.log('Error' + err);
-  }
-}
-
-async function displayvideo(videos, theid){
-
-  let video = videos.videos[theid - 1];
-  const BODY = document.querySelector('body');
-
-  // Bætum við titli :
-  const Header = element('h1', {}, {}, video.title);
-  BODY.appendChild(Header);
-
-  // main fyrir contentið :
-  const main = element('main', {}, {}, '');
-  BODY.appendChild(main);
-
-  // Grid fyrir videoið :
-  const videocontainer = element('div', {'class' : 'grid'}, {}, '');
-
-  // Röð fyrir videoið :
-  const videorow = element('div', {'class' : 'row'}, {}, '');
-  videocontainer.appendChild(videorow);
-
-  // Dálkur fyrir videoið :
-  const videocol = element('div', {'class' : 'col col-12'}, {}, '');
-  videorow.appendChild(videocol);
-
-  // Videoið sjálft :
-  const thevideo = element('video', {'src' : video.video}, {}, '');
-  videocol.appendChild(thevideo);
-
-  main.appendChild(videocontainer);
-
-  displayControlBar(thevideo);
-
-  displayRecommandations(videos, video);
-
-}
-
-async function displayControlBar(thevideo){
-
+async function displayControlBar(thevideo) {
   const main = document.querySelector('main');
 
   // Grid fyrir control-bar :
-  const controlbar = element('div', {'class' : 'grid'}, {},'');
+  const controlbar = element('div', { class: 'grid' }, {}, '');
   main.appendChild(controlbar);
 
   // Row fyrir takkana :
-  const controlrow = element('div', {'class' : 'row controlrow'}, {}, '');
+  const controlrow = element('div', { class: 'row controlrow' }, {}, '');
   controlbar.appendChild(controlrow);
 
   // Back takki :
-  const backimg = element('img', {'class' : 'button-img', 'src' : 'img/back.svg', 'width' : '75', 'height' : '75'}, {}, '');
-  const btnback = element('button', {'class' : 'button'}, {click: (e) => { back(thevideo); }}, backimg);
+  const backimg = element('img', {
+    class: 'button-img', src: 'img/back.svg', width: '75', height: '75',
+  }, {}, '');
+  const btnback = element('button', { class: 'button' }, { click: () => { back(thevideo); } }, backimg);
   controlrow.appendChild(btnback);
 
   // Play takki :
-  const playimg = element('img', {'class' : 'button-img', 'src' : 'img/play.svg', 'width' : '75', 'height' : '75', 'id' : 'playpause'}, {}, '');
-  const btnplay = element('button', {'class' : 'button'}, {click: (e) => { playpause(thevideo); }}, playimg);
+  const playimg = element('img', {
+    class: 'button-img', src: 'img/play.svg', width: '75', height: '75', id: 'playpause',
+  }, {}, '');
+  const btnplay = element('button', { class: 'button' }, { click: () => { playpause(thevideo); } }, playimg);
   controlrow.appendChild(btnplay);
 
   // Mute takki :
-  const muteimg = element('img', {'class' : 'button-img', 'src' : 'img/mute.svg', 'width' : '75', 'height' : '75', 'id' : 'muteunmute'}, {}, '');
-  const btnmute = element('button', {'class' : 'button'}, {click: (e) => { muteunmute(thevideo); }}, muteimg);
+  const muteimg = element('img', {
+    class: 'button-img', src: 'img/mute.svg', width: '75', height: '75', id: 'muteunmute',
+  }, {}, '');
+  const btnmute = element('button', { class: 'button' }, { click: () => { muteunmute(thevideo); } }, muteimg);
   controlrow.appendChild(btnmute);
 
   // Full screen takki :
-  const fullscreenimg = element('img', {'class' : 'button-img', 'src' : 'img/fullscreen.svg', 'width' : '75', 'height' : '75'}, {}, '');
-  const btnfullscreen = element('button', {'class' : 'button'}, {click: (e) => { fullscreen(thevideo); }}, fullscreenimg);
+  const fullscreenimg = element('img', {
+    class: 'button-img', src: 'img/fullscreen.svg', width: '75', height: '75',
+  }, {}, '');
+  const btnfullscreen = element('button', { class: 'button' }, { click: () => { fullscreen(thevideo); } }, fullscreenimg);
   controlrow.appendChild(btnfullscreen);
 
   // Next takki :
-  const nextimg = element('img', {'class' : 'button-img', 'src' : 'img/next.svg', 'width' : '75', 'height' : '75'}, {}, '');
-  const btnnext = element('button', {'class' : 'button'}, {click: (e) => { next(thevideo); }}, nextimg);
+  const nextimg = element('img', {
+    class: 'button-img', src: 'img/next.svg', width: '75', height: '75',
+  }, {}, '');
+  const btnnext = element('button', { class: 'button' }, { click: () => { next(thevideo); } }, nextimg);
   controlrow.appendChild(btnnext);
-
 }
 
-async function displayRecommandations(videos, video){
-
+async function displayRecommandations(videos, video) {
   const BODY = document.querySelector('body');
   const themain = document.querySelector('main');
   console.log(video.related);
 
   // Búum til Grid :
-  const tengt = element('div', {'class' : 'grid'}, {}, '');
+  const tengt = element('div', { class: 'grid' }, {}, '');
   themain.appendChild(tengt);
 
   // Header rowið :
-  const tengtHeaderRow = element('div', {'class' : 'row'}, {}, '');
+  const tengtHeaderRow = element('div', { class: 'row' }, {}, '');
   tengt.appendChild(tengtHeaderRow);
 
   // Header colið :
-  const tengtHeaderCol = element('h2', {'class' : 'col col-12'}, {}, 'Tengd myndbönd');
+  const tengtHeaderCol = element('h2', { class: 'col col-12' }, {}, 'Tengd myndbönd');
   tengtHeaderRow.appendChild(tengtHeaderCol);
 
   // Röð fyrir videoin :
-  const relatedVideosRow = element('div', {'class' : 'row'}, {}, '');
+  const relatedVideosRow = element('div', { class: 'row' }, {}, '');
   tengt.appendChild(relatedVideosRow);
 
   // Col fyrir hvert video :
   const relatedVideosCol = new Array(video.related.length);
-  for(let i = 0; i < video.related.length; i++){
-    let vidId = video.related[i];
-    relatedVideosCol[i] = element('div', {'class' : 'col col-4 col-sm-12'}, {}, '');
-    relatedVideosCol[i].onclick = function() {
-        document.location.href = `video.html?id=${vidId}`;
+  for (let i = 0; i < video.related.length; i += 1) {
+    const vidId = video.related[i];
+    relatedVideosCol[i] = element('div', { class: 'col col-4 col-sm-12' }, {}, '');
+    relatedVideosCol[i].onclick = () => {
+      document.location.href = `video.html?id=${vidId}`;
     };
     relatedVideosRow.appendChild(relatedVideosCol[i]);
   }
 
   // Thumbnail fyrir hvert video :
   const Thumbnails = new Array(video.related.length);
-  for(let i = 0; i < video.related.length; i++){
-    let vidId = video.related[i];
-    Thumbnails[i] = element('img', {'src' : videos.videos[vidId - 1].poster, 'class' : 'thumbnails'}, {}, '');
+  for (let i = 0; i < video.related.length; i += 1) {
+    const vidId = video.related[i];
+    Thumbnails[i] = element('img', { src: videos.videos[vidId - 1].poster, class: 'thumbnails' }, {}, '');
     relatedVideosCol[i].appendChild(Thumbnails[i]);
   }
 
   // Info fyrir hvert video :
   const Time = new Array(video.related.length);
   const Title = new Array(video.related.length);
-  for(let i = 0; i < video.related.length; i++){
-    let vidId = video.related[i];
+  for (let i = 0; i < video.related.length; i += 1) {
+    const vidId = video.related[i];
     Time[i] = element('h5', {}, {}, videoAge(videos.videos[vidId - 1].created));
     Title[i] = element('h4', {}, {}, videos.videos[vidId - 1].title);
     relatedVideosCol[i].appendChild(Title[i]);
@@ -149,6 +110,51 @@ async function displayRecommandations(videos, video){
   const Tilbaka = element('a', {'href' : 'index.html'}, {}, 'Til baka');
   BODY.appendChild(Tilbaka);
 
+}
+
+async function displayvideo(videos, theid) {
+  const video = videos.videos[theid - 1];
+  const BODY = document.querySelector('body');
+
+  // Bætum við titli :
+  const Header = element('h1', {}, {}, video.title);
+  BODY.appendChild(Header);
+
+  // main fyrir contentið :
+  const main = element('main', {}, {}, '');
+  BODY.appendChild(main);
+
+  // Grid fyrir videoið :
+  const videocontainer = element('div', { class: 'grid' }, {}, '');
+
+  // Röð fyrir videoið :
+  const videorow = element('div', { class: 'row' }, {}, '');
+  videocontainer.appendChild(videorow);
+
+  // Dálkur fyrir videoið :
+  const videocol = element('div', { class: 'col col-12' }, {}, '');
+  videorow.appendChild(videocol);
+
+  // Videoið sjálft :
+  const thevideo = element('video', { src: video.video }, {}, '');
+  videocol.appendChild(thevideo);
+
+  main.appendChild(videocontainer);
+
+  displayControlBar(thevideo);
+
+  displayRecommandations(videos, video);
+}
+
+async function readVideoID(videodata) {
+  try {
+    const urlString = (window.location.href).toLowerCase();
+    const url = new URL(urlString);
+    const videoId = url.searchParams.get('id');
+    displayvideo(videodata, videoId);
+  } catch (err) {
+    console.log('Error' + err);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
