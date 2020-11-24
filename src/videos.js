@@ -151,15 +151,28 @@ async function readVideoID(videodata) {
     const urlString = (window.location.href).toLowerCase();
     const url = new URL(urlString);
     const videoId = url.searchParams.get('id');
-    displayvideo(videodata, videoId);
+    let found = false;
+    for(let i = 0; i < videodata.videos.length; i++){
+      if(videodata.videos[i].id == videoId){
+        found = true;
+      }
+    }
+    if(found){
+      displayvideo(videodata, videoId);
+    }else{
+      const errorMessage = element('div', { class: 'errormessage' }, {}, `Villa við að sækja vídeo, ekkert vídeo fannst með id: ${videoId}`);
+      document.querySelector('body').appendChild(errorMessage);
+    }
   } catch (err) {
     console.log('Error' + err);
   }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-
+  const Loading = element('div', { class: 'loading' }, {}, 'Hleð gögnum...');
+  document.querySelector('body').appendChild(Loading);
   await fetchVideos().then((data) => {
     readVideoID(data);
   });
+  document.querySelector('body').removeChild(Loading);
 });

@@ -67,7 +67,10 @@ async function displayVideos(videos) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+  const Loading = element('div', { class: 'loading' }, {}, 'Hleð gögnum...');
+  document.querySelector('body').appendChild(Loading);
   await fetchVideos().then((data) => {
     displayVideos(data);
   });
+  document.querySelector('body').removeChild(Loading);
 });
