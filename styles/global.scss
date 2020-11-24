@@ -23,6 +23,11 @@ body {
 }
 
 .split{
+  max-width: 1032px;
   width: 80%;
-  margin: auto;
+  margin: 1rem auto;
+}
+
+.loading{
+  font-size: 40px;
 }

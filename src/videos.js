@@ -1,21 +1,124 @@
-import { element, videoLength, videoAge } from './lib/utils';
+import { element, videoAge, videoLength } from './lib/utils';
 import fetchVideos from './lib/fetchvideos';
+import {
+  back, playpause, muteunmute, fullscreen, next,
+} from './videolib/videocontrols';
 
 
-async function readVideoID(videodata){
-  try {
-    const url_string = (window.location.href).toLowerCase();
-    const url = new URL(url_string);
-    const videoId = url.searchParams.get('id');
-    displayvideo(videodata, videoId);
-  } catch (err) {
-    console.log('Error' + err);
-  }
+async function displayControlBar(thevideo) {
+  const main = document.querySelector('main');
+
+  // Grid fyrir control-bar :
+  const controlbar = element('div', { class: 'grid' }, {}, '');
+  main.appendChild(controlbar);
+
+  // Row fyrir takkana :
+  const controlrow = element('div', { class: 'row controlrow' }, {}, '');
+  controlbar.appendChild(controlrow);
+
+  // Back takki :
+  const backimg = element('img', {
+    class: 'button-img', src: 'img/back.svg', width: '75', height: '75',
+  }, {}, '');
+  const btnback = element('button', { class: 'button' }, { click: () => { back(thevideo); } }, backimg);
+  controlrow.appendChild(btnback);
+
+  // Play takki :
+  const playimg = element('img', {
+    class: 'button-img', src: 'img/play.svg', width: '75', height: '75', id: 'playpause',
+  }, {}, '');
+  const btnplay = element('button', { class: 'button' }, { click: () => { playpause(thevideo); } }, playimg);
+  controlrow.appendChild(btnplay);
+
+  // Mute takki :
+  const muteimg = element('img', {
+    class: 'button-img', src: 'img/mute.svg', width: '75', height: '75', id: 'muteunmute',
+  }, {}, '');
+  const btnmute = element('button', { class: 'button' }, { click: () => { muteunmute(thevideo); } }, muteimg);
+  controlrow.appendChild(btnmute);
+
+  // Full screen takki :
+  const fullscreenimg = element('img', {
+    class: 'button-img', src: 'img/fullscreen.svg', width: '75', height: '75',
+  }, {}, '');
+  const btnfullscreen = element('button', { class: 'button' }, { click: () => { fullscreen(thevideo); } }, fullscreenimg);
+  controlrow.appendChild(btnfullscreen);
+
+  // Next takki :
+  const nextimg = element('img', {
+    class: 'button-img', src: 'img/next.svg', width: '75', height: '75',
+  }, {}, '');
+  const btnnext = element('button', { class: 'button' }, { click: () => { next(thevideo); } }, nextimg);
+  controlrow.appendChild(btnnext);
 }
 
-async function displayvideo(videos, theid){
+async function displayRecommandations(videos, video) {
+  const BODY = document.querySelector('body');
+  const themain = document.querySelector('main');
+  console.log(video.related);
 
-  let video = videos.videos[theid - 1];
+  // Búum til Grid :
+  const tengt = element('div', { class: 'grid' }, {}, '');
+  themain.appendChild(tengt);
+
+  // Header rowið :
+  const tengtHeaderRow = element('div', { class: 'row' }, {}, '');
+  tengt.appendChild(tengtHeaderRow);
+
+  // Header colið :
+  const tengtHeaderCol = element('h2', { class: 'col col-12' }, {}, 'Tengd myndbönd');
+  tengtHeaderRow.appendChild(tengtHeaderCol);
+
+  // Röð fyrir videoin :
+  const relatedVideosRow = element('div', { class: 'row' }, {}, '');
+  tengt.appendChild(relatedVideosRow);
+
+  // Col fyrir hvert video :
+  const relatedVideosCol = new Array(video.related.length);
+  for (let i = 0; i < video.related.length; i += 1) {
+    const vidId = video.related[i];
+    relatedVideosCol[i] = element('div', { class: 'col col-4 col-sm-12' }, {}, '');
+    relatedVideosCol[i].onclick = () => {
+      document.location.href = `video.html?id=${vidId}`;
+    };
+    relatedVideosRow.appendChild(relatedVideosCol[i]);
+  }
+
+  // Thumbnail fyrir hvert video :
+  const Thumbnails = new Array(video.related.length);
+  const Length = new Array(video.related.length);
+  const Div = new Array(video.related.length);
+  for (let i = 0; i < video.related.length; i += 1) {
+    const vidId = video.related[i];
+    Thumbnails[i] = element('img', { src: videos.videos[vidId - 1].poster, class: 'thumbnails' }, {}, '');
+    Length[i] = element('span', {'class': 'display-time'}, {}, videoLength(videos.videos[vidId - 1].duration));
+    Div[i] =  element('div', {'class': 'thumbnail-container videocontainer'}, {}, Thumbnails[i],Length[i]);
+    relatedVideosCol[i].appendChild(Div[i]);
+  }
+
+  // Info fyrir hvert video :
+  const Time = new Array(video.related.length);
+  const Title = new Array(video.related.length);
+  for (let i = 0; i < video.related.length; i += 1) {
+    const vidId = video.related[i];
+    Time[i] = element('h5', {}, {}, videoAge(videos.videos[vidId - 1].created));
+    Title[i] = element('h4', {}, {}, videos.videos[vidId - 1].title);
+    relatedVideosCol[i].appendChild(Title[i]);
+    relatedVideosCol[i].appendChild(Time[i]);
+  }
+
+  // Split horizontal row :
+  const hr = element('hr', {'class' : 'split'}, {}, '');
+  BODY.appendChild(hr);
+
+  // Til baka linkurinn :
+  const Tilbaka = element('a', {'href' : 'index.html'}, {}, 'Til baka');
+  BODY.appendChild(Tilbaka);
+
+}
+
+async function displayvideo(videos, theid) {
+  const video = videos.videos[theid - 1];
   const BODY = document.querySelector('body');
 
   // Bætum við titli :
@@ -27,122 +130,54 @@ async function displayvideo(videos, theid){
   BODY.appendChild(main);
 
   // Grid fyrir videoið :
-  const videocontainer = element('div', {'class' : 'grid'}, {}, '');
+  const videocontainer = element('div', { class: 'grid' }, {}, '');
 
   // Röð fyrir videoið :
-  const videorow = element('div', {'class' : 'row'}, {}, '');
+  const videorow = element('div', { class: 'row' }, {}, '');
   videocontainer.appendChild(videorow);
 
   // Dálkur fyrir videoið :
-  const videocol = element('div', {'class' : 'col col-12'}, {}, '');
+  const videocol = element('div', { class: 'col col-12 videocol' }, {}, '');
   videorow.appendChild(videocol);
 
   // Videoið sjálft :
-  const thevideo = element('video', {'src' : video.video}, {}, '');
+  const thevideo = element('video', { src: video.video }, {}, '');
   videocol.appendChild(thevideo);
 
   main.appendChild(videocontainer);
 
-  //grid fyrir controlbar
-  const controlbar = element('div', {'class' : 'row'}, {},'');
-  const image = element('img', {'class' : 'button-img', 'src' : 'img/back.svg', 'width' : '75', 'height' : '75'}, {}, '');
-  const button = element('button', {'class' : 'button'}, {}, image);
+  displayControlBar(thevideo);
 
-  // 1. Create the button
-  var button1 = document.createElement("button");
-  button1.innerHTML = '<img src = "img/back.svg">';
-
-  // 2. Append somewhere
-  main.appendChild(button);
-
-  // 3. Add event handler
-  button.addEventListener ("click", function() {
-    alert("back");
-  });
-
-  const image = element('img', {'class' : 'button-img', 'src' : 'img/back.svg', 'width' : '75', 'height' : '75'}, {}, '');
-  const button= element('button', {'class' : 'button'}, {}, image);
-
-  // 1. Create the button
-  var button2 = document.createElement("button");
-  button2.innerHTML = '<img src = "img/next.svg">';
-  
-  // 2. Append somewhere
-  main.appendChild(button);
-  
-  // 3. Add event handler
-  button2.addEventListener ("click", function() {
-    alert("next");
-  });
-  
   displayRecommandations(videos, video);
 }
 
-async function displayRecommandations(videos, video){
-
-  const themain = document.querySelector('main');
-  console.log(video.related);
-
-  // Búum til Grid :
-  const tengt = element('div', {'class' : 'grid'}, {}, '');
-  themain.appendChild(tengt);
-
-  // Header rowið :
-  const tengtHeaderRow = element('div', {'class' : 'row'}, {}, '');
-  tengt.appendChild(tengtHeaderRow);
-
-  // Header colið :
-  const tengtHeaderCol = element('h2', {'class' : 'col col-12'}, {}, 'Tengd myndbönd');
-  tengtHeaderRow.appendChild(tengtHeaderCol);
-
-  // Röð fyrir videoin :
-  const relatedVideosRow = element('div', {'class' : 'row'}, {}, '');
-  tengt.appendChild(relatedVideosRow);
-
-  // Col fyrir hvert video :
-  const relatedVideosCol = new Array(video.related.length);
-  for(let i = 0; i < video.related.length; i++){
-    let vidId = video.related[i];
-    relatedVideosCol[i] = element('div', {'class' : 'col col-4 col-sm-12'}, {}, '');
-    relatedVideosCol[i].onclick = function() {
-        document.location.href = `video.html?id=${vidId}`;
-    };
-    relatedVideosRow.appendChild(relatedVideosCol[i]);
+async function readVideoID(videodata) {
+  try {
+    const urlString = (window.location.href).toLowerCase();
+    const url = new URL(urlString);
+    const videoId = url.searchParams.get('id');
+    let found = false;
+    for(let i = 0; i < videodata.videos.length; i++){
+      if(videodata.videos[i].id == videoId){
+        found = true;
+      }
+    }
+    if(found){
+      displayvideo(videodata, videoId);
+    }else{
+      const errorMessage = element('div', { class: 'errormessage' }, {}, `Villa við að sækja vídeo, ekkert vídeo fannst með id: ${videoId}`);
+      document.querySelector('body').appendChild(errorMessage);
+    }
+  } catch (err) {
+    console.log('Error' + err);
   }
-
-  // Thumbnail fyrir hvert video :
-  const Thumbnails = new Array(video.related.length);
-  for(let i = 0; i < video.related.length; i++){
-    let vidId = video.related[i];
-    Thumbnails[i] = element('img', {'src' : videos.videos[vidId - 1].poster, 'class' : 'thumbnails'}, {}, '');
-    relatedVideosCol[i].appendChild(Thumbnails[i]);
-  }
-
-  // Info fyrir hvert video :
-  const Time = new Array(video.related.length);
-  const Title = new Array(video.related.length);
-  for(let i = 0; i < video.related.length; i++){
-    let vidId = video.related[i];
-    Time[i] = element('h5', {}, {}, videoAge(videos.videos[vidId - 1].created));
-    Title[i] = element('h4', {}, {}, videos.videos[vidId - 1].title);
-    relatedVideosCol[i].appendChild(Title[i]);
-    relatedVideosCol[i].appendChild(Time[i]);
-  }
-
-  const BODY = document.querySelector('body');
-
-  // Split horizontal row :
-  const hr = element('hr', {'class' : 'split'}, {}, '');
-  BODY.appendChild(hr);
-
-  // Til baka linkurinn :
-  const Tilbaka = element('a', {'href' : 'index.html'}, {}, 'Til baka');
-  BODY.appendChild(Tilbaka);
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-
+  const Loading = element('div', { class: 'loading' }, {}, 'Hleð gögnum...');
+  document.querySelector('body').appendChild(Loading);
   await fetchVideos().then((data) => {
     readVideoID(data);
   });
+  document.querySelector('body').removeChild(Loading);
 });

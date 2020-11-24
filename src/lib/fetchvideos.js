@@ -12,9 +12,7 @@ async function fetchVideos() {
       }
       return result.json();
     })
-    .then((data) => {
-      return data;
-    })
+    .then((data) => (data))
     .catch(() => {
       console.error('Villa við að sækja gögn');
     });
