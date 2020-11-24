@@ -1,3 +1,5 @@
+import { element } from './utils';
+
 const URL = '../videos.json';
 
 /**
@@ -14,9 +16,9 @@ async function fetchVideos() {
     })
     .then((data) => (data))
     .catch(() => {
-      console.error('Villa við að sækja gögn');
+      const errorMessage = element('div', { class: 'errormessage' }, {}, 'Villa við að sækja gögn');
+      document.querySelector('body').appendChild(errorMessage);
     });
-  console.log(TheData);
   return TheData;
 }
 

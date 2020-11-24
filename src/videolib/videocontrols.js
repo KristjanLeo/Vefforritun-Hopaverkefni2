@@ -6,13 +6,12 @@ export async function back(thevideo) {
 
 export async function playpause(thevideo) {
   const playpauseimg = document.getElementById('playpause');
-  if (!(thevideo.paused || thevideo.ended) && thevideo.currentTime > 0) {
+  if (!(thevideo.paused || thevideo.ended) && thevideo.currentTime > 0) {
     thevideo.pause();
     playpauseimg.src = 'img/play.svg';
 
     // Bætum við overlayinu ...
     const VideoContainer = document.querySelector('.videocol');
-    console.log(VideoContainer);
     const overlay = element('div', { class: 'overlay' }, {}, '');
     const overlayicon = element('img', { class: 'overlayicon', src: 'img/play.svg' }, { click: () => { playpause(thevideo); } }, '');
     VideoContainer.appendChild(overlay);
