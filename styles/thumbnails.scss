@@ -2,18 +2,17 @@
   width: 100%;
 }
 
-.videocontainer{
+.videocontainer {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  cursor: pointer;
 }
 
-.info{
-  height: 3rem;
-  display: flex;
+.info {
   align-content: space-between;
+  display: flex;
   flex-direction: column;
+  height: 3rem;
   line-height: 2.2rem;
-
 }

@@ -1,14 +1,14 @@
 video {
-  width: 100%;
   height: auto;
+  width: 100%;
 
-  @media(max-width: 560px){
-    width: 100%;
+  @media (max-width: 560px) {
     height: auto;
+    width: 100%;
   }
 }
 
-.button{
-  background-color: white;
-  border:0;
+.button {
+  background-color: #fff;
+  border: 0;
 }
