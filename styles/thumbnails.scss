@@ -3,14 +3,14 @@
   width: 100%;
 }
 
-.videocontainer{
+.videocontainer {
   cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.info{
+.info {
   align-content: space-between;
   display: flex;
   flex-direction: column;
@@ -18,11 +18,11 @@
   line-height: 2.2rem;
 }
 
-.thumbnail-container{
+.thumbnail-container {
   position: relative;
 }
 
-.display-time{
+.display-time {
   background-color:rgba(24, 24, 24, 0.6);
   bottom: 0.3rem;
   color: #FFF;
