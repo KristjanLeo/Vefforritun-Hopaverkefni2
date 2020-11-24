@@ -14,17 +14,25 @@ export async function playpause(thevideo){
     const VideoContainer = document.querySelector('.videocol');
     console.log(VideoContainer);
     const overlay = element('div', { class: 'overlay' }, {}, '');
+    const overlayicon = element('img', { class: 'overlayicon', src: 'img/play.svg' }, { click: () => { playpause(thevideo); } }, '');
     VideoContainer.appendChild(overlay);
+    VideoContainer.appendChild(overlayicon);
 
   }else{
     thevideo.play();
     playpauseimg.src = 'img/pause.svg';
 
     // Removeum overlayið ...
-    const VideoContainer = document.querySelector('.videocol');
     const overlay = document.querySelector('.overlay');
-    VideoContainer.removeChild(overlay);
-
+    const overlayicon = document.querySelector('.overlayicon');
+    if(overlay){
+      const VideoContainer = overlay.parentElement;
+      VideoContainer.removeChild(overlay);
+    }
+    if(overlayicon){
+      const VideoContainer = overlayicon.parentElement;
+      VideoContainer.removeChild(overlayicon);
+    }
   }
 }
 
