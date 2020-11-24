@@ -4,7 +4,6 @@ import {
   back, playpause, muteunmute, fullscreen, next,
 } from './videolib/videocontrols';
 
-
 async function displayControlBar(thevideo) {
   const main = document.querySelector('main');
 
@@ -91,8 +90,8 @@ async function displayRecommandations(videos, video) {
   for (let i = 0; i < video.related.length; i += 1) {
     const vidId = video.related[i];
     Thumbnails[i] = element('img', { src: videos.videos[vidId - 1].poster, class: 'thumbnails' }, {}, '');
-    Length[i] = element('span', {'class': 'display-time'}, {}, videoLength(videos.videos[vidId - 1].duration));
-    Div[i] =  element('div', {'class': 'thumbnail-container videocontainer'}, {}, Thumbnails[i],Length[i]);
+    Length[i] = element('span', { class: 'display-time' }, {}, videoLength(videos.videos[vidId - 1].duration));
+    Div[i] = element('div', { class: 'thumbnail-container videocontainer' }, {}, Thumbnails[i], Length[i]);
     relatedVideosCol[i].appendChild(Div[i]);
   }
 
@@ -108,13 +107,12 @@ async function displayRecommandations(videos, video) {
   }
 
   // Split horizontal row :
-  const hr = element('hr', {'class' : 'split'}, {}, '');
+  const hr = element('hr', { class: 'split' }, {}, '');
   BODY.appendChild(hr);
 
   // Til baka linkurinn :
-  const Tilbaka = element('a', {'href' : 'index.html'}, {}, 'Til baka');
+  const Tilbaka = element('a', { href: 'index.html' }, {}, 'Til baka');
   BODY.appendChild(Tilbaka);
-
 }
 
 async function displayvideo(videos, theid) {
@@ -157,19 +155,19 @@ async function readVideoID(videodata) {
     const url = new URL(urlString);
     const videoId = url.searchParams.get('id');
     let found = false;
-    for(let i = 0; i < videodata.videos.length; i++){
-      if(videodata.videos[i].id == videoId){
+    for (let i = 0; i < videodata.videos.length; i++) {
+      if (videodata.videos[i].id == videoId) {
         found = true;
       }
     }
-    if(found){
+    if (found) {
       displayvideo(videodata, videoId);
-    }else{
+    } else {
       const errorMessage = element('div', { class: 'errormessage' }, {}, `Villa við að sækja vídeo, ekkert vídeo fannst með id: ${videoId}`);
       document.querySelector('body').appendChild(errorMessage);
     }
   } catch (err) {
-    console.log('Error' + err);
+    console.log(`Error${err}`);
   }
 }
 

@@ -1,12 +1,12 @@
-import { element } from '../lib/utils.js';
+import { element } from '../lib/utils';
 
-export async function back(thevideo){
+export async function back(thevideo) {
   thevideo.currentTime -= 3;
 }
 
-export async function playpause(thevideo){
-  let playpauseimg = document.getElementById('playpause');
-  if(!(thevideo.paused || thevideo.ended) && thevideo.currentTime > 0){
+export async function playpause(thevideo) {
+  const playpauseimg = document.getElementById('playpause');
+  if (!(thevideo.paused || thevideo.ended) && thevideo.currentTime > 0) {
     thevideo.pause();
     playpauseimg.src = 'img/play.svg';
 
@@ -17,40 +17,39 @@ export async function playpause(thevideo){
     const overlayicon = element('img', { class: 'overlayicon', src: 'img/play.svg' }, { click: () => { playpause(thevideo); } }, '');
     VideoContainer.appendChild(overlay);
     VideoContainer.appendChild(overlayicon);
-
-  }else{
+  } else {
     thevideo.play();
     playpauseimg.src = 'img/pause.svg';
 
     // Removeum overlayið ...
     const overlay = document.querySelector('.overlay');
     const overlayicon = document.querySelector('.overlayicon');
-    if(overlay){
+    if (overlay) {
       const VideoContainer = overlay.parentElement;
       VideoContainer.removeChild(overlay);
     }
-    if(overlayicon){
+    if (overlayicon) {
       const VideoContainer = overlayicon.parentElement;
       VideoContainer.removeChild(overlayicon);
     }
   }
 }
 
-export async function muteunmute(thevideo){
-  let muteunmuteimg = document.getElementById('muteunmute');
-  if(thevideo.volume > 0){
+export async function muteunmute(thevideo) {
+  const muteunmuteimg = document.getElementById('muteunmute');
+  if (thevideo.volume > 0) {
     thevideo.volume = 0;
     muteunmuteimg.src = 'img/unmute.svg';
-  }else{
+  } else {
     thevideo.volume = 1.0;
     muteunmuteimg.src = 'img/mute.svg';
   }
 }
 
-export async function fullscreen(thevideo){
+export async function fullscreen(thevideo) {
   thevideo.requestFullscreen();
 }
 
-export async function next(thevideo){
+export async function next(thevideo) {
   thevideo.currentTime += 3;
 }

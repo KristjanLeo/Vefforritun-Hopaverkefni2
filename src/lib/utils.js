@@ -44,40 +44,38 @@ export function element(name, attributes = null, events = null, ...children) {
   return el;
 }
 
-
 /**
  * Tekur inn tíma í sekúndum og skilar fallegum tíma ... TODO
  * @param  {int} time Tími í sekúndum
  * @return {string}   Fallegur tími
  */
-export function videoLength(time){
-  let hours = Math.floor(time/3600) > 0 ? Math.floor(time/3600) + ':' : '';
-  let minutes= Math.floor((time%3600)/60) > 0 ? Math.floor((time%3600)/60) > 10 ? Math.floor((time%3600)/60) : '0' + Math.floor((time%3600)/60) + ':' : '00:';
-  let seconds= time%60 > 10 ? time&60 : '0'+ time%60;
+export function videoLength(time) {
+  const hours = Math.floor(time / 3600) > 0 ? `${Math.floor(time / 3600)}:` : '';
+  const minutes = Math.floor((time % 3600) / 60) > 0 ? Math.floor((time % 3600) / 60) > 10 ? Math.floor((time % 3600) / 60) : `0${Math.floor((time % 3600) / 60)}:` : '00:';
+  const seconds = time % 60 > 10 ? time & 60 : `0${time % 60}`;
   return (hours + minutes + seconds);
 }
 
-export function videoAge(seconds){
-  let age = (Date.now()-seconds)/1000
-  if(age>365*24*60*60){
-      return('Fyrir '+Math.floor(age/(365*24*60*60))+' árum síðan');
+export function videoAge(seconds) {
+  const age = (Date.now() - seconds) / 1000;
+  if (age > 365 * 24 * 60 * 60) {
+    return (`Fyrir ${Math.floor(age / (365 * 24 * 60 * 60))} árum síðan`);
   }
-  else if(age>=30*24*60*60){
-      return('Fyrir '+Math.floor(age/(30*24*60*60))+' mánuðum síðan');
+  if (age >= 30 * 24 * 60 * 60) {
+    return (`Fyrir ${Math.floor(age / (30 * 24 * 60 * 60))} mánuðum síðan`);
   }
-  else if(age>=7*24*60*60){
-      return('Fyrir '+Math.floor(age/(7*24*60*60))+' vikum síðan');
+  if (age >= 7 * 24 * 60 * 60) {
+    return (`Fyrir ${Math.floor(age / (7 * 24 * 60 * 60))} vikum síðan`);
   }
-  else if(age>=24*60*60){
-      return('Fyrir '+Math.floor(age/(24*60*60))+' dögum síðan');
+  if (age >= 24 * 60 * 60) {
+    return (`Fyrir ${Math.floor(age / (24 * 60 * 60))} dögum síðan`);
   }
-  else if(age>=60*60){
-      return('Fyrir '+Math.floor(age/(60*60))+' klukkutímum síðan');
+  if (age >= 60 * 60) {
+    return (`Fyrir ${Math.floor(age / (60 * 60))} klukkutímum síðan`);
   }
-  else if(age>=60){
-      return('Fyrir '+Math.floor(age/60)+' mínútum síðan');
+  if (age >= 60) {
+    return (`Fyrir ${Math.floor(age / 60)} mínútum síðan`);
   }
-  else{
-      return('Fyrir ')+age+' sekúndum síðan'
-  }
+
+  return `Fyrir ${age} sekúndum síðan`;
 }
