@@ -54,7 +54,6 @@ async function displayControlBar(thevideo) {
 async function displayRecommandations(videos, video) {
   const BODY = document.querySelector('body');
   const themain = document.querySelector('main');
-  console.log(video.related);
 
   // Búum til Grid :
   const tengt = element('div', { class: 'grid' }, {}, '');
@@ -155,7 +154,7 @@ async function readVideoID(videodata) {
     const url = new URL(urlString);
     const videoId = url.searchParams.get('id');
     let found = false;
-    for (let i = 0; i < videodata.videos.length; i++) {
+    for (let i = 0; i < videodata.videos.length; i += 1) {
       if (videodata.videos[i].id == videoId) {
         found = true;
       }
@@ -167,7 +166,8 @@ async function readVideoID(videodata) {
       document.querySelector('body').appendChild(errorMessage);
     }
   } catch (err) {
-    console.log(`Error${err}`);
+    const errorMessage = element('div', { class: 'errormessage' }, {}, 'Villa við að sækja vídeo');
+    document.querySelector('body').appendChild(errorMessage);
   }
 }
 
