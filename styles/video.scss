@@ -33,3 +33,12 @@ video {
   height: calc(100vw * 9.0/16.0);
   max-height: 736px;
 }
+
+.overlayicon {
+  position: absolute;
+  margin: auto;
+  top: calc(50% - 50px);
+  right: calc(50% - 50px);
+  width: 100px;
+  height: 100px;
+}
