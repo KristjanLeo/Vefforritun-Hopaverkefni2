@@ -31,4 +31,5 @@ video {
 .videocol {
   position: relative;
   height: calc(100vw * 9.0/16.0);
+  max-height: 736px;
 }
