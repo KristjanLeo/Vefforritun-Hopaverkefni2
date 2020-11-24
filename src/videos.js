@@ -137,7 +137,7 @@ async function displayvideo(videos, theid) {
   videocontainer.appendChild(videorow);
 
   // Dálkur fyrir videoið :
-  const videocol = element('div', { class: 'col col-12' }, {}, '');
+  const videocol = element('div', { class: 'col col-12 videocol' }, {}, '');
   videorow.appendChild(videocol);
 
   // Videoið sjálft :

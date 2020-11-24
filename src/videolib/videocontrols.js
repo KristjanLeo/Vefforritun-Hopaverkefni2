@@ -1,3 +1,5 @@
+import { element } from '../lib/utils.js';
+
 export async function back(thevideo){
   thevideo.currentTime -= 3;
 }
@@ -7,9 +9,22 @@ export async function playpause(thevideo){
   if(!(thevideo.paused || thevideo.ended) && thevideo.currentTime > 0){
     thevideo.pause();
     playpauseimg.src = 'img/play.svg';
+
+    // Bætum við overlayinu ...
+    const VideoContainer = document.querySelector('.videocol');
+    console.log(VideoContainer);
+    const overlay = element('div', { class: 'overlay' }, {}, '');
+    VideoContainer.appendChild(overlay);
+
   }else{
     thevideo.play();
     playpauseimg.src = 'img/pause.svg';
+
+    // Removeum overlayið ...
+    const VideoContainer = document.querySelector('.videocol');
+    const overlay = document.querySelector('.overlay');
+    VideoContainer.removeChild(overlay);
+
   }
 }
 
