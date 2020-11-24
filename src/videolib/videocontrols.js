@@ -1,7 +1,8 @@
 import { element } from '../lib/utils';
 
 export async function back(thevideo) {
-  thevideo.currentTime -= 3;
+  const thevid = thevideo;
+  thevid.currentTime -= 3;
 }
 
 export async function playpause(thevideo) {
@@ -35,12 +36,13 @@ export async function playpause(thevideo) {
 }
 
 export async function muteunmute(thevideo) {
+  const thevid = thevideo;
   const muteunmuteimg = document.getElementById('muteunmute');
-  if (thevideo.volume > 0) {
-    thevideo.volume = 0;
+  if (thevid.volume > 0) {
+    thevid.volume = 0;
     muteunmuteimg.src = 'img/unmute.svg';
   } else {
-    thevideo.volume = 1.0;
+    thevid.volume = 1.0;
     muteunmuteimg.src = 'img/mute.svg';
   }
 }
@@ -50,5 +52,6 @@ export async function fullscreen(thevideo) {
 }
 
 export async function next(thevideo) {
-  thevideo.currentTime += 3;
+  const thevid = thevideo;
+  thevid.currentTime += 3;
 }
