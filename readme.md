@@ -15,7 +15,7 @@
       *** **- fetchvideos.js -** sem sér um að sækja vídeó-in 
       *** **- utils.js -** heldur utan um öll auka föll sem eru notuð í verkefninu
    ** **-videolib -** folder sem inniheldur aðeins eina javascript möppu:
-      *** **- videocontrols.js -** heldur utanum skipanirnar fyrir takkana undir myndbandinu
+      *** - videocontrols.js -** heldur utanum skipanirnar fyrir takkana undir myndbandinu
 * **Styles** mappan inniheldur allar skrár sem hafa að gera með útlit síðunnar. Þær eru:
 * **- Config -** Geymir allar breytur fyrir stíl
 * **- Global -** Stýlar sem eiga við allt
