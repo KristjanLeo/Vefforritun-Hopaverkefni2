@@ -26,7 +26,7 @@
 * **Videos** er mappan sem geymir bæði myndböndin og thumbnail-in fyrir báðar síðurnar
 * **Html** skrárnar eru tvær:
    * **Index.html** Inniheldur öll myndböndin sem hægt er að horfa á síðunni
-   * **- Video.html** er síðan sem að myndbandið sem smellt er  á spilast á
+   * **Video.html** er síðan sem að myndbandið sem smellt er  á spilast á
 * **rollup.config.js** Heldur utanum stillingar fyrir rollup
 * **Styles.scss** importar öllum .scss skrám úr styles möppunni og svo býr node-sass til styles.css 
 * **Styles.css** Aðal css skráin sem heldur utanum alla stíla fyrir verkefnið
