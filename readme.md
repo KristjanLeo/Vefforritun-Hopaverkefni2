@@ -5,17 +5,17 @@
 * `npm run dev` - Keyrir concurrently, browser-sync, rollup og sass. Þæginlegt á meðan maður er að forrita svo að browserinn update-ist sjáfkrafa.
 * `npm test` Athugar hvor kóðinn uppfylli eslint reglur. Sýnir síðan allar villur sem finnast.
 ### Skráum hefur verið raðað skipulega niður.
-***Dist** mappan heldur utanum rollup-aða javascript-kóðann
-***Fyrirmynd** var þæginleg mappa þar sem fyrirmynd verkefnisins var geymd
-***IMG** mappan inniheldur allar myndir sem tengjast síðunni nema thumbnail myndbandanna
-***Src** mappan inniheldur javascript skrárnar sem stýra síðunni. Þær eru:
-****- Index -** Inniheldur öll myndböndin sem hægt er að horfa á síðunni
-****- Video -** er síðan sem að myndbandið sem smellt er  á spilast á
-**- lib - folder sem inniheldur tvö javascript skjöl:
-    ***- fetchvideos.js - sem sér um að sækja vídeó-in 
-    ***- utils.js - heldur utan um öll auka föll sem eru notuð í verkefninu
-**-videolib - folder sem inniheldur aðeins eina javascript möppu:
-    - videocontrols.js - heldur utanum skipanirnar fyrir takkana undir myndbandinu
+* **Dist** mappan heldur utanum rollup-aða javascript-kóðann
+* **Fyrirmynd** var þæginleg mappa þar sem fyrirmynd verkefnisins var geymd
+* **IMG** mappan inniheldur allar myndir sem tengjast síðunni nema thumbnail myndbandanna
+* **Src** mappan inniheldur javascript skrárnar sem stýra síðunni. Þær eru:
+** **- Index -** Inniheldur öll myndböndin sem hægt er að horfa á síðunni
+** **- Video -** er síðan sem að myndbandið sem smellt er  á spilast á
+   **- lib - folder sem inniheldur tvö javascript skjöl:
+      ***- fetchvideos.js - sem sér um að sækja vídeó-in 
+      ***- utils.js - heldur utan um öll auka föll sem eru notuð í verkefninu
+   **-videolib - folder sem inniheldur aðeins eina javascript möppu:
+      ***- videocontrols.js - heldur utanum skipanirnar fyrir takkana undir myndbandinu
 * **Styles** mappan inniheldur allar skrár sem hafa að gera með útlit síðunnar. Þær eru:
 - Config - Geymir allar breytur fyrir stíl
 - Global - Stýlar sem eiga við allt
