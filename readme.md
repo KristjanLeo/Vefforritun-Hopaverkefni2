@@ -17,12 +17,12 @@
      * **-videolib -** folder sem inniheldur aðeins eina javascript möppu:
         * **- videocontrols.js -** heldur utanum skipanirnar fyrir takkana undir myndbandinu
 * **Styles** mappan inniheldur allar skrár sem hafa að gera með útlit síðunnar. Þær eru:
-* **- Config -** Geymir allar breytur fyrir stíl
-* **- Global -** Stýlar sem eiga við allt
-* **- Grid-overlay -** Hugað fyrir viðhald á síðunni
-* **- Grid -** Skýr beinagrind fyrir staðsetningar
-* **- Thumbnails -** Inniheldur alla stíla fyrir svokölluð thumbnail allra myndbanda á síðunni
-* **- Video -** Heldur utanum stílanna fyrir takkanna undir myndbandinu og overlay-ið sem kemur yfir myndbandið þegar það er pásað
+   * **- Config -** Geymir allar breytur fyrir stíl
+   * **- Global -** Stýlar sem eiga við allt
+   * **- Grid-overlay -** Hugað fyrir viðhald á síðunni
+   * **- Grid -** Skýr beinagrind fyrir staðsetningar
+   * **- Thumbnails -** Inniheldur alla stíla fyrir svokölluð thumbnail allra myndbanda á síðunni
+   * **- Video -** Heldur utanum stílanna fyrir takkanna undir myndbandinu og overlay-ið sem kemur yfir myndbandið þegar það er pásað
 * **Videos** er mappan sem geymir bæði myndböndin og thumbnail-in fyrir báðar síðurnar
 * **Html** skrárnar eru tvær:
 * **- Index -** Inniheldur öll myndböndin sem hægt er að horfa á síðunni
