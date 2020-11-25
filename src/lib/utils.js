@@ -51,8 +51,15 @@ export function element(name, attributes = null, events = null, ...children) {
  */
 export function videoLength(time) {
   const hours = Math.floor(time / 3600) > 0 ? `${Math.floor(time / 3600)}:` : '';
-  const minutes = Math.floor((time % 3600) / 60) > 0 ? Math.floor((time % 3600) / 60) > 10 ? Math.floor((time % 3600) / 60) : `0${Math.floor((time % 3600) / 60)}:` : '00:';
-  const seconds = time % 60 > 10 ? time && 60 : `0${time % 60}`;
+  let minutes;
+  if (Math.floor((time % 3600) / 60) > 0 && Math.floor((time % 3600) / 60) < 10) {
+    minutes = `${Math.floor((time % 3600) / 60)}:`;
+  } else if (Math.floor((time % 3600) / 60) > 0) {
+    minutes = `0${Math.floor((time % 3600) / 60)}:`;
+  } else {
+    minutes = '00:';
+  }
+  const seconds = time % 60 > 10 ? time % 60 : `0${time % 60}`;
   return (hours + minutes + seconds);
 }
 

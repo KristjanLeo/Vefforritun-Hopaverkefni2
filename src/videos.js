@@ -155,7 +155,7 @@ async function readVideoID(videodata) {
     const videoId = url.searchParams.get('id');
     let found = false;
     for (let i = 0; i < videodata.videos.length; i += 1) {
-      if (videodata.videos[i].id == videoId) {
+      if (Number.parseInt(videodata.videos[i].id, 10) === Number.parseInt(videoId, 10)) {
         found = true;
       }
     }
