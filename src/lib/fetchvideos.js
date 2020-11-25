@@ -1,6 +1,6 @@
 import { element } from './utils';
 
-const URL = '../videos.json';
+const URL = './videos.json';
 
 /**
  * Sækir upplýsingar um videoin
