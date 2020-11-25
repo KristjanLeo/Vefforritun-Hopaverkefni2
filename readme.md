@@ -9,8 +9,8 @@
 * **Fyrirmynd** var þæginleg mappa þar sem fyrirmynd verkefnisins var geymd
 * **IMG** mappan inniheldur allar myndir sem tengjast síðunni nema thumbnail myndbandanna
 * **Src** mappan inniheldur javascript skrárnar sem stýra síðunni. Þær eru:
-- Index - javascript kóðinn sem uppbyggir index.hmtl
-- Videos - javascript kóðinn sem uppbyggir video.html
+** **- Index -** Inniheldur öll myndböndin sem hægt er að horfa á síðunni
+** **- Video -** er síðan sem að myndbandið sem smellt er  á spilast á
 - lib - folder sem inniheldur tvö javascript skjöl:
     - fetchvideos.js - sem sér um að sækja vídeó-in 
     - utils.js - heldur utan um öll auka föll sem eru notuð í verkefninu
