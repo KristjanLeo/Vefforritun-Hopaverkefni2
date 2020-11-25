@@ -4,7 +4,7 @@
 ### Hægt er að keyra tvær aðal skipannir með npm
 * `npm run dev` - Keyrir samtímis browser-sync, rollup og node-sass. Þæginlegt á meðan maður er að forrita svo að browserinn update-ist sjálfkrafa.
 * `npm test` Athugar hvort kóðinn uppfylli eslint og stylelint reglur. Sýnir síðan allar villur sem finnast.
-### Skráum hefur verið raðað skipulega niður.
+### Skrám hefur verið raðað skipulega niður.
 * **Dist** mappan heldur utanum rollup-aða javascript-kóðann
 * **IMG** mappan inniheldur allar myndir sem tengjast síðunni sjálfri
 * **Src** mappan inniheldur javascript skrárnar sem stýra síðunni. Þær eru:
@@ -30,7 +30,7 @@
 * **Styles.scss** importar öllum .scss skrám úr styles möppunni og svo býr node-sass til styles.css
 * **Styles.css** Aðal css skráin sem heldur utanum alla stíla fyrir verkefnið
 * **Videos.json** Geymir upplýsingar hvað varðar myndböndinn á síðunni
-...asdf
+* asdf
 ## 2. Upplýsingar um höfunda
 | Nöfn                        | Netföng       | GitHub Notendanöfn |
 | :----------------------------|:-------------| :------------------|
