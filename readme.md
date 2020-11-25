@@ -30,9 +30,6 @@
 * **Styles.scss** importar öllum .scss skrám úr styles möppunni og svo býr node-sass til styles.css
 * **Styles.css** Aðal css skráin sem heldur utanum alla stíla fyrir verkefnið
 * **Videos.json** Geymir upplýsingar hvað varðar myndböndinn á síðunni
----
-asdf...
----
 ## 2. Upplýsingar um höfunda
 | Nöfn                        | Netföng       | GitHub Notendanöfn |
 | :----------------------------|:-------------| :------------------|
