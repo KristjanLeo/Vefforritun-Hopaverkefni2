@@ -22,7 +22,7 @@ video {
 }
 
 .overlay {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: $overlay-color;
   height: 100%;
   position: absolute;
   width: 100%;

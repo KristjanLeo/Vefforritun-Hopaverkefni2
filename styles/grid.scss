@@ -35,13 +35,13 @@
 /* Desktop */
 @for $i from 1 through 12 {
   .col-#{$i} {
-    width: $i*8.3333333%;
+    width: $i*$one-col;
   }
 }
 
 @for $i from 1 through 12 {
   .offset-col-#{$i} {
-    margin-left: $i*8.3333333%;
+    margin-left: $i*$one-col;
   }
 }
 
@@ -49,7 +49,7 @@
 @for $i from 1 through 12 {
   @media (max-width: 560px) {
     .col-sm-#{$i} {
-      width: $i*8.3333333%;
+      width: $i*$one-col;
     }
   }
 }
@@ -57,7 +57,7 @@
 @for $i from 1 through 12 {
   @media (max-width: 560px) {
     .offset-col-sm-#{$i} {
-      margin-left: $i*8.3333333%;
+      margin-left: $i*$one-col;
     }
   }
 }

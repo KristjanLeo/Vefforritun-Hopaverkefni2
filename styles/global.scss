@@ -18,7 +18,7 @@ body {
   align-items: center;
   display: flex;
   flex-direction: column;
-  font-size: 16px;
+  font-size: $default-font-size;
   justify-content: center;
 }
 
@@ -29,5 +29,9 @@ body {
 }
 
 .loading {
-  font-size: 40px;
+  font-size: $error-font-size;
+}
+
+a {
+  color: #000;
 }
